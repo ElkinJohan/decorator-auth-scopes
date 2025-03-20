@@ -1,0 +1,17 @@
+# ----------------------------------------------
+# APP General Configuration
+# ----------------------------------------------
+springdoc:
+  server:
+    address: localhost:8090 # client dir api gateway
+  openapi:
+    dev-url: http://${springdoc.server.address}
+  swagger-ui:
+    config-url: http://${springdoc.server.address}/${spring.application.name}/v3/api-docs/swagger-config
+    oauth2-redirect-url: http://${springdoc.server.address}/${spring.application.name}/swagger-ui/oauth2-redirect.html
+    url: http://${springdoc.server.address}/${spring.application.name}/v3/api-docs
+server:
+  port: 8085
+logging:
+  level:
+    root: INFO

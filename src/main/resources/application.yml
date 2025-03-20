@@ -1,0 +1,59 @@
+# ----------------------------------------------
+# APP General Configuration
+# ----------------------------------------------
+spring:
+  application:
+    name: @project.name@
+  protocol: 'http'
+info:
+  project-version: @project.version@
+  build-timestamp: ${maven.build.timestamp}
+controller:
+  properties:
+    base-path: /api/v1/@project.name@
+
+# ----------------------------------------------
+# OPENAPI for documentation
+# ----------------------------------------------
+springdoc:
+  swagger-ui:
+    use-root-path: true
+  properties:
+    developer-name: 'Elkin Imbachi'
+    organization-url: 'https://github.com/ElkinJohan'
+    project-licence-link: 'https://url-some.com/License'
+    project-licence-msg: 'https://url-some.com/LicenseMsg'
+    project-name: @project.name@
+    project-short-description: @project.description@
+    project-tos-link: 'https://url-some.com/TermsOfService'
+    project-tos-msg: 'https://url-some.com/TermsOfServiceMsg'
+  openapi:
+    dev-url: ${spring.protocol}://${springdoc.server.address}:${springdoc.server.port}
+
+# ----------------------------------------------
+# METRICS of microservices
+# ----------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      status:
+        http-mapping:
+          down: 500
+      show-details: always
+  http exchanges:
+    recording:
+      include: request-headers,time-taken,session-id
+
+server:
+  ssl:
+    enabled: false
+    key-store: classpath:truststore.jks
+    key-store-password: ${SSL_KEY_STORE_PASSWORD:}
+    trust-store: classpath:truststore.jks
+    trust-store-password: ${SSL_TRUST_STORE_PASSWORD:}
+    key-store-type: JKS
+    key-alias: mykey
