@@ -1,6 +1,6 @@
-package com.daicode.authscopes.config.headers.validation;
+package com.daicode.authscopes.config.headers;
 
-import com.daicode.authscopes.config.headers.HeaderAuth;
+import com.daicode.authscopes.config.headers.validation.IHeaderAuthValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class HeaderValidatorInterceptor implements HandlerInterceptor {
+public class HeaderAuthInterceptor implements HandlerInterceptor {
 
     private final IHeaderAuthValidator headerAuthValidator;
 
