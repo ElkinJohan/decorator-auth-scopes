@@ -1,6 +1,7 @@
 package com.daicode.authscopes.config.headers.validation;
 
 import com.daicode.authscopes.config.headers.HeaderAuth;
+import com.daicode.authscopes.exceptions.UnauthorizedAccessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +33,9 @@ public class HeaderAuthValidatorImpl implements IHeaderAuthValidator {
         }
 
         if (scopesArray.length == 0) {
-            log.error("Access denied: Scopes not provided in the request");
-            return false;
+            log.error("Access denied for URI '{}': Scopes not provided in the request", request.getRequestURI());
+            throw new UnauthorizedAccessException(
+                    "Access denied by scopes", "Scopes not provided in the request");
         }
 
         boolean validRoles =
@@ -44,8 +46,12 @@ public class HeaderAuthValidatorImpl implements IHeaderAuthValidator {
         boolean validScopes = Arrays.stream(headerAuth.scopes()).anyMatch(scope -> Arrays.asList(scopesArray).contains(scope));
 
         if (!validRoles || !validScopes) {
-            log.error("Access denied: Roles or scopes not allowed for the process");
-            return false;
+            log.error("Access denied for URI '{}': Roles or scopes not allowed. Required Roles: {}, Provided: {} | Required Scopes: {}, Provided: {}",
+                    request.getRequestURI(), Arrays.toString(headerAuth.roles()), Arrays.toString(rolesArray),
+                    Arrays.toString(headerAuth.scopes()), Arrays.toString(scopesArray));
+            throw new UnauthorizedAccessException(
+                    "Access denied by roles or scopes",
+                    "Roles or scopes not allowed for the process");
         }
 
         return true;
