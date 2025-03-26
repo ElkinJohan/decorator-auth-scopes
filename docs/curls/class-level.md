@@ -54,7 +54,6 @@ curl --location 'http://localhost:8085/api/v1/authscopes/class-level/all-with-sc
 
 📌 **Notas:**
 - Modifica los valores de `X-Scopes` según los permisos requeridos.
-- Este documento se actualizará a medida que se agreguen más endpoints.
 
 📩 *Última actualización: **`26-03-2025`***
 
