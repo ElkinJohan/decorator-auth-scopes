@@ -1,0 +1,23 @@
+# ----------------------------------------------
+# APP General Configuration
+# ----------------------------------------------
+springdoc:
+  server:
+    address: localhost
+    port: 8085
+  openapi:
+    dev-url: ${spring.protocol}://${springdoc.server.address}:${springdoc.server.port}
+  swagger-ui:
+    config-url: /v3/api-docs/swagger-config
+    oauth2-redirect-url: http://${springdoc.server.address}:${springdoc.server.port}/swagger-ui/oauth2-redirect.html
+    url: /v3/api-docs
+server:
+  port: 8085
+logging:
+  level:
+    root: INFO
+
+# ----------------------------------------------
+# Role with all privileged configuration
+# ----------------------------------------------
+privileged.role: superadmin

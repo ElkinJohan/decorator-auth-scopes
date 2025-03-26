@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
  * TODOS LOS MÉTODOS DE ESTA CLASE NECESITAN PASAR POR EL AUTH DE SCOPES
  *
  * */
-@HeaderAuth(scopes = {"greeting", "goodbye"})
+@HeaderAuth(scopes = {"BOSS"})
 @RestController
 @RequestMapping("${controller.properties.base-path}/class-level")
 public class ClassLevelController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all-with-scopes/greeting")
-    public String getGreeting() {
+    public String greetBoss() {
         return """
                 Greetings!!!.
-                Executor scope: greeting.
+                Executor scope: BOSS.
                 Decorator at: class level.""";
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all-with-scopes/bye")
-    public String sayGoodbye() {
+    public String sayGoodbyeBoss() {
         return """
                 Goodbye!!!.
-                Executor scope: goodbye.
+                Executor scope: BOSS.
                 Decorator at: class level.""";
     }
 }

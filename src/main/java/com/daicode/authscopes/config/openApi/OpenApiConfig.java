@@ -73,7 +73,13 @@ public class OpenApiConfig {
                 .license(mitLicense);
 
         // Devolver la configuración completa de OpenAPI
+
+        // config to disable auth in swagger
         return new OpenAPI()
+                .info(info)
+                .servers(List.of(devServer));
+
+        /*return new OpenAPI()
                 .info(info)
                 .servers(List.of(devServer))
                 .components(new Components()
@@ -81,6 +87,6 @@ public class OpenApiConfig {
                                 new SecurityScheme()
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer").bearerFormat("JWT")))
-                .addSecurityItem(new SecurityRequirement().addList("bearer-key"));
+                .addSecurityItem(new SecurityRequirement().addList("bearer-key"));*/
     }
 }

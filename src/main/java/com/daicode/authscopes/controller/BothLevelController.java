@@ -18,19 +18,19 @@ public class BothLevelController {
     @GetMapping("/class-level")
     public String getGreetingClassLevel() {
         return """
-                Both level:
+                Both level: hello.
                 Executor scope: greeting.
                 Decorator at: class level
                 """;
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @HeaderAuth(scopes = {"READ"})
+    @HeaderAuth(scopes = {"goodbye"})
     @PostMapping("/method-level-in-class-level")
     public String postAdminData() {
         return """
-                Both level:
-                Executor scope: READ.
+                Both level: bye!!
+                Executor scope: goodbye.
                 Decorator at: method level
                 """;
     }

@@ -1,5 +1,6 @@
 package com.daicode.authscopes.config.headers;
 
+import com.daicode.authscopes.config.headers.validation.HeaderValidatorInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
