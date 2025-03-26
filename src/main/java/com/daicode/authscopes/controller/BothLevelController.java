@@ -1,6 +1,7 @@
 package com.daicode.authscopes.controller;
 
 import com.daicode.authscopes.config.headers.HeaderAuth;
+import com.daicode.authscopes.dto.ApiResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,22 +17,22 @@ public class BothLevelController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/class-level")
-    public String getGreetingClassLevel() {
-        return """
-                Both level: hello.
-                Executor scope: greeting.
-                Decorator at: class level
-                """;
+    public ApiResponseDTO getGreetingClassLevel() {
+        return ApiResponseDTO.builder()
+                .message("Both level: hello.")
+                .executorScope("greeting")
+                .decoratorAt("class level")
+                .build();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @HeaderAuth(scopes = {"goodbye"})
     @PostMapping("/method-level-in-class-level")
-    public String postAdminData() {
-        return """
-                Both level: bye!!
-                Executor scope: goodbye.
-                Decorator at: method level
-                """;
+    public ApiResponseDTO postAdminData() {
+        return ApiResponseDTO.builder()
+                .message("Both level: bye!!")
+                .executorScope("goodbye")
+                .decoratorAt("method level")
+                .build();
     }
 }

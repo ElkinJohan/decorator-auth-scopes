@@ -1,6 +1,7 @@
 package com.daicode.authscopes.controller;
 
 import com.daicode.authscopes.config.headers.HeaderAuth;
+import com.daicode.authscopes.dto.ApiResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,19 +19,21 @@ public class ClassLevelController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all-with-scopes/greeting")
-    public String greetBoss() {
-        return """
-                Greetings!!!.
-                Executor scope: BOSS.
-                Decorator at: class level.""";
+    public ApiResponseDTO greetBoss() {
+        return ApiResponseDTO.builder()
+                .message("Greetings!!!")
+                .executorScope("BOSS")
+                .decoratorAt("class level")
+                .build();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/all-with-scopes/bye")
-    public String sayGoodbyeBoss() {
-        return """
-                Goodbye!!!.
-                Executor scope: BOSS.
-                Decorator at: class level.""";
+    public ApiResponseDTO sayGoodbyeBoss() {
+        return ApiResponseDTO.builder()
+                .message("Goodbye!!!")
+                .executorScope("BOSS")
+                .decoratorAt("class level")
+                .build();
     }
 }
