@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.function.Supplier;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
@@ -42,13 +44,15 @@ class HeaderAuthValidatorImplTest {
     @Test
     void testUnauthorizedWhenNoScopesProvided() {
         when(request.getHeader("X-Scopes")).thenReturn(null);
-        assertThrows(UnauthorizedAccessException.class, () -> headerAuthValidator.isAuthorized(request, createHeaderAuth("WRITE")));
+        Supplier<Object> supplier = () -> headerAuthValidator.isAuthorized(request, createHeaderAuth("WRITE"));
+        assertThrows(UnauthorizedAccessException.class, supplier::get);
     }
 
     @Test
     void testUnauthorizedWithInvalidScope() {
         when(request.getHeader("X-Scopes")).thenReturn("READ");
-        assertThrows(UnauthorizedAccessException.class, () -> headerAuthValidator.isAuthorized(request, createHeaderAuth("WRITE")));
+        Supplier<Object> supplier = () -> headerAuthValidator.isAuthorized(request, createHeaderAuth("WRITE"));
+        assertThrows(UnauthorizedAccessException.class, supplier::get);
     }
 
     private HeaderAuth createHeaderAuth(String... scopes) {
