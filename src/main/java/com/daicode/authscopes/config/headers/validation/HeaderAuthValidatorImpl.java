@@ -7,14 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Setter
 @Getter
 @Slf4j
-@Service
+@Component
 public class HeaderAuthValidatorImpl implements IHeaderAuthValidator {
 
     @Value("${privileged.role}")
